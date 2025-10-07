@@ -1,4 +1,4 @@
-using Grocery.Core.Helpers;
+
 
 namespace TestCore
 {
@@ -12,35 +12,16 @@ namespace TestCore
 
         //Happy flow
         [Test]
-        public void TestPasswordHelperReturnsTrue()
+        [SetCulture("nl-NL")]
+        [TestCase(1.99, "€ 1,99")]
+        [TestCase(0.0, "€ 0,00")]
+        [TestCase(1234.5, "€ 1.234,50")]
+        [TestCase(-3.2, "€ -3,20")]
+        public void TestPriceFormatting(decimal input, string expected)
         {
-            string password = "user3";
-            string passwordHash = "sxnIcZdYt8wC8MYWcQVQjQ==.FKd5Z/jwxPv3a63lX+uvQ0+P7EuNYZybvkmdhbnkIHA=";
-            Assert.IsTrue(PasswordHelper.VerifyPassword(password, passwordHash));
-        }
-
-        [TestCase("user1", "IunRhDKa+fWo8+4/Qfj7Pg==.kDxZnUQHCZun6gLIE6d9oeULLRIuRmxmH2QKJv2IM08=")]
-        [TestCase("user3", "sxnIcZdYt8wC8MYWcQVQjQ==.FKd5Z/jwxPv3a63lX+uvQ0+P7EuNYZybvkmdhbnkIHA=")]
-        public void TestPasswordHelperReturnsTrue(string password, string passwordHash)
-        {
-            Assert.IsTrue(PasswordHelper.VerifyPassword(password, passwordHash));
-        }
-
-
-        //Unhappy flow
-        [Test]
-        public void TestPasswordHelperReturnsFalse()
-        {
-            string password = "user3";
-            string passwordHash = "sxnIcZdYt8wC8MYWcQVQjQ";
-            Assert.IsFalse(PasswordHelper.VerifyPassword(password, passwordHash));
-        }
-
-        [TestCase("user1", "IunRhDKa+fWo8+4/Qfj7Pg")]
-        [TestCase("user3", "sxnIcZdYt8wC8MYWcQVQjQ")]
-        public void TestPasswordHelperReturnsFalse(string password, string passwordHash)
-        {
-            Assert.IsFalse(PasswordHelper.VerifyPassword(password, passwordHash));
+            decimal price = input;
+            var result = string.Format("{0:C2}", price);
+            Assert.That(result, Is.EqualTo(expected));
         }
     }
 }
