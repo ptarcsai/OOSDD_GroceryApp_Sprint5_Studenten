@@ -1,4 +1,5 @@
 ﻿using Grocery.App.Views;
+using System.Globalization;
 
 namespace Grocery.App
 {
@@ -6,6 +7,9 @@ namespace Grocery.App
     {
         public AppShell()
         {
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nl-NL");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nl-NL");
+
             InitializeComponent();
             Routing.RegisterRoute(nameof(GroceryListItemsView), typeof(GroceryListItemsView));
             Routing.RegisterRoute(nameof(ProductView), typeof(ProductView));
