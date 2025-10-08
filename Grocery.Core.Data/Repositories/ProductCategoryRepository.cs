@@ -21,5 +21,13 @@ namespace Grocery.Core.Data.Repositories
         {
             return productCategoryList;
         }
+
+        public ProductCategory Add(ProductCategory item)
+        {
+            var nextId = productCategoryList.Count == 0 ? 1 : productCategoryList.Max(x => x.Id) + 1;
+            item.Id = nextId;
+            productCategoryList.Add(item);
+            return item;
+        }
     }
 }

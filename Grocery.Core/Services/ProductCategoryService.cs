@@ -30,5 +30,7 @@ namespace Grocery.Core.Services
 
             return result;
         }
+
+        public ProductCategory Add(ProductCategory item) => _productCategoryRepository.Add(item);
     }
 }
