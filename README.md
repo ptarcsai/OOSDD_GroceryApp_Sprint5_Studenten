@@ -1,57 +1,45 @@
-#GroceryApp sprint5 Studentversie  
-Dit is de startversie voor studenten voor sprint 5.  
- 
-UC15 Toevoegen THT datum aan product is compleet.  
+# BoodschappenApp Sprint 5 - Peter Tarcsai s1188507
 
-UC14 Toevoegen prijzen:  
-- Prijs toevoegen aan product class en uitbreiden constructor chain.  
-- ProductRepository --> prijsveld vullen met waarden.  
-- ProductView uitbreiden met kolom voor de prijs (header en inhoud van de tabel).      
+## Branching strategie (Gitflow)
 
-UC12 Productcategoriën toevoegen --> zelfstandig uitwerken:  
-Ontwerp:
->```mermaid
->classDiagram
->direction LR
->    class Product {
->	    +int Id
->	    +string Name
->	    +int Stock
->	    +DateOnly ShelfLife
->	    +Decimal Price
->   }
->    class ProductCategory {
->	    +int Id
->	    +string Name
->	    +int ProductId
->	    +int CategoryId
->    }
->    class Category {
->	    +int Id
->	    +string Name
->    }
->
->    Product "1" -- "*" ProductCategory
->    ProductCategory "*" -- "1" Category
-> ```
-Stappenplan:  
-- Maak class Category  
-- Maak class ProductCategory  
-- Maak Interface en Repository voor Category  
-- Maak Interface en Repository voor ProductCategory  
-- Maak Interface en Service voor Category  
-- Maak Interface en Service voor ProductCategory  
-- Registreer de gemaakte Repo's en services in MauiProgramm  
-- Maak CategoriesViewModel.  
-- Maak CategoriesView.  
-- Registreer De view en het ViewModel in MauiProgramm.  
-- Maak een menu entry in de tabbar in AppShell.xaml en registreer route in AppShell.xaml.cs  
-- Maak ProductCategoriesViewModel.  
-- Maak ProductCategoriesView.  
-- Registreer De view en het ViewModel in MauiProgramm.  
-- Zorg dat de ProductCategoriesView gestart kan worden na het klikken op een Category in CategoriesView  
-- Registreer route naar ProductCategoriesView in AppShell.xaml.cs  
+Ik gebruik **Gitflow** als branching strategie:
 
+- **`main`**  
+  Bevat de meest stabiele productiecode, met alleen getest en goedgekeurde code. 
+  Wordt gebruik als basis voor het maken van de echte Release.  
 
+- **`develop`**  
+  Hier worden alle nieuwe features samengebracht na het mergen van de Use Case feature branches. 
 
+- **`feature/*`**  
+  Voor iedere Use Case wordt een aparte feature branch aangemaakt vanaf `develop`.  
+  Na afronding wordt deze terug gemerged in `develop`.  
 
+- **`release`**  
+  Wordt gemaakt vanuit `develop` en wordt gebruikt voor een laatste check voordat naar main gepusht kan worden.  
+
+- **`hotfix`**  
+  Wordt gemaakt vanuit `main` om urgente bugs direct te kunnen oplossen.  
+  Na fixen wordt de branch terug gemerged naar `main` of eventueel `develop`.  
+
+---
+
+## Projectstructuur
+Projectstructuur is uitgewerkt volgens **Clean Architecture**
+- `Grocery.App`: Views en ViewModels **(MVVM)**
+- `Grocery.Core`: Modellen en Services
+- `Grocery.Core.Data`: Repositories
+- `TestCore`: Unit tests
+
+---
+
+## Use Cases van release
+
+### UC12 Toevoegen Categorieën
+Compleet. Verder testen.
+
+### UC14 Toevoegen prijs
+Compleet.
+
+### UC15 Toevoegen THT datum  
+Compleet. 
